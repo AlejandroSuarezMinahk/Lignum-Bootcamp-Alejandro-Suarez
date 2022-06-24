@@ -1,4 +1,5 @@
 @extends('layouts.plantillabase');
+<script src="{{asset('search/js/search.js')}}" type="module"></script>
 
 @section('contenido')
 <a href="peliculas/create" class="btn btn-primary">Agregar película</a>
@@ -36,10 +37,13 @@
                     @method('DELETE')
                     <button type="submit" class="btn btn-danger">Borrar</button>
                 </form>
+                
             </td>
         </tr>
         @endforeach
     </tbody>
+    <div class="search"><input type="text" id="mysearch" class="form-control"  placeholder="Buscar una película"></div>
+    <ul id="showlist" tabindex='1' class="list-group"></ul>
 </table>
 <a href="/actores" class="btn btn-primary">Ver sección de actores</a>
 @endsection

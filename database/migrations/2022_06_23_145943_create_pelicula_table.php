@@ -19,8 +19,11 @@ return new class extends Migration
             $table->String('Titulo', 30);
             $table->time('Duración');
             $table->String('Sinopsis');
-            $table->Integer('ActorPrincipalId');
-            $table->String('imagen');
+            $table->foreignId('ActorPrincipalID')
+            ->constrained('actor')
+            ->cascadeOnUpdate()
+            ->nullOnDelete();
+            $table->String('imagenes');            
             $table->timestamps();
         });
     }

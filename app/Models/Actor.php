@@ -5,12 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Actor extends Model
-{
-    public function pelicula(){
-        return $this->hasOne('App\Models\Pelicula');        
-    }
-
-    // use HasFactory;
+class Actor extends Model{
     protected $table = 'actor'; 
+    
+    public function peliculas(){
+        return $this->hasMany(Pelicula::class, 'id');        
+    }    
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pelicula;
+use App\Models\Actor;
 
 class PeliculaController extends Controller
 {
@@ -25,7 +26,8 @@ class PeliculaController extends Controller
      */
     public function create()
     {
-        return view('pelicula.create');
+        $actores = Actor::all();
+        return view('pelicula.create',compact('actores'));
     }
 
     /**
@@ -36,6 +38,15 @@ class PeliculaController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'Titulo'=> 'required',
+            'Año'=> 'required',
+            'Duración'=>'required',
+            'Sinopsis'=> 'required',
+            'ActorPrincipalID'=> 'required',
+            'imagen'=>'required'
+        ]);
+
         $peliculas = new Pelicula();
 
         if($request->hasFile('imagen')){
@@ -89,6 +100,7 @@ class PeliculaController extends Controller
      */
     public function update(Request $request, $id)
     {
+
         $pelicula = Pelicula::find($id);
 
         $pelicula->Año = $request->get('Año');

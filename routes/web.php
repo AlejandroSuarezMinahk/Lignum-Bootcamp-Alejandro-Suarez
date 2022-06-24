@@ -19,6 +19,9 @@ Route::get('/', function () {
 
 Route::resource('peliculas','App\Http\Controllers\PeliculaController');
 Route::resource('actores','App\Http\Controllers\ActorController');
+Route::get('/Actor/archive', [ActorController::class, 'archive']);
+Route::get('/Pelicula/archive', [PeliculaController::class, 'archive']);
+Route::get('search/peliculas','SearchController@pelis')->name('search.pelis');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function(){
     return view('dashboard');

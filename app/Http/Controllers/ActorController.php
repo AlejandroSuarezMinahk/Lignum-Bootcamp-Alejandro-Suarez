@@ -35,8 +35,19 @@ class ActorController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
+        /* Validación del formulario
+        El objeto $request se encarga de recoger los datos del fomulario,        
+        entonces lo utilizamos junto con el metodo validate para poner
+        reglas que necesitamos que se cumplan. En caso de no cumplirse,
+        redirecciona a la misma página.
+        Sintaxis: 'id' => 'regla'
+        */
+        $request->validate([
+            'Nombre'=> 'required',
+            'FechaNacimiento'=> 'required|min:01-01-1900|max:24-06-2022'
+        ]);
+
         $actor = new Actor();
         $actor->Nombre = $request->get('Nombre');
         $actor->FechaNacimiento = $request->get('FechaNacimiento');
@@ -76,8 +87,12 @@ class ActorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
+        $request->validate([
+            'Nombre'=> 'required',
+            'FechaNacimiento'=> 'required'
+        ]);
+
         $actor = Actor::find($id);
         
         $actor->Nombre = $request->get('Nombre');
